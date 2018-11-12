@@ -30,27 +30,27 @@ public class CoolWeatherDB {
 		return coolweatherdb;
 	}
 	
-	//将Provice实例存储到数据库
-	public void saveProvice(Provice provice){
-		if(provice!=null){
+	//将Provnice实例存储到数据库
+	public void saveProvnice(Province province){
+		if(province!=null){
 			ContentValues values=new ContentValues();
-			values.put("provice_name", provice.getProvicename());
-			values.put("provice_code", provice.getProvicecode());
-			db.insert("Provice", null, values);
+			values.put("province_name", province.getProvincename());
+			values.put("province_code", province.getProvincecode());
+			db.insert("Province", null, values);
 		}
 	}
 	
 	//从数据库读书所有省份信息
-	public List<Provice> loadProvice(){
-		List<Provice> list=new ArrayList<Provice>();
-		Cursor cursor=db.query("Provice", null, null, null, null, null, null);
+	public List<Province> loadProvnice(){
+		List<Province> list=new ArrayList<Province>();
+		Cursor cursor=db.query("Province", null, null, null, null, null, null);
 		if(cursor.moveToFirst()){
 			do{
-				Provice provice1=new Provice();
-				provice1.setId(cursor.getInt(cursor.getColumnIndex("id")));
-				provice1.setProvicename(cursor.getString(cursor.getColumnIndex("provice_name")));
-				provice1.setProvicecode(cursor.getString(cursor.getColumnIndex("provice_code")));
-				list.add(provice1);
+				Province province1=new Province();
+				province1.setId(cursor.getInt(cursor.getColumnIndex("id")));
+				province1.setProvincename(cursor.getString(cursor.getColumnIndex("province_name")));
+				province1.setProvincecode(cursor.getString(cursor.getColumnIndex("province_code")));
+				list.add(province1);
 			}while(cursor.moveToNext());
 		}
 		return list;
@@ -62,51 +62,51 @@ public class CoolWeatherDB {
 			ContentValues values=new ContentValues();
 			values.put("city_name", city.getCityname());
 			values.put("city_code", city.getCitycode());
-			values.put("provice_id",city.getProviceid());
+			values.put("province_id",city.getProvinceid());
 			db.insert("City", null, values);
 		}
 	}
 	
 	//从数据库读取某省下所有城市信息
-	public List<City> loadCities(int proviceId){
+	public List<City> loadCities(int provinceId){
 		List<City> list=new ArrayList<City>();
-		Cursor cursor=db.query("City", null, "provice_id=?", new String[] {String.valueOf(proviceId)}, null, null, null);
+		Cursor cursor=db.query("City", null, "province_id=?", new String[] {String.valueOf(provinceId)}, null, null, null);
 		if(cursor.moveToFirst()){
 			do{
 				City city=new City();
 				city.setId(cursor.getInt(cursor.getColumnIndex("id")));
 				city.setCityname(cursor.getString(cursor.getColumnIndex("city_name")));
 				city.setCitycode(cursor.getString(cursor.getColumnIndex("city_code")));
-				city.setProviceid(proviceId);//传递的参数
+				city.setProvinceid(provinceId);//传递的参数
 				list.add(city);
 			}while(cursor.moveToNext());
 		}
 		return list;
 	}
 	
-	//将country实例存储到数据库
-	public void saveCountry(Country country){
-		if(country !=null){
+	//将county实例存储到数据库
+	public void saveCounty(County county){
+		if(county !=null){
 		ContentValues values=new ContentValues();
-		values.put("country_name", country.getCountryname());
-		values.put("country_code", country.getCountrycode());
-		values.put("city_id", country.getCityid());
-		db.insert("country", null, values);
+		values.put("county_name", county.getCountyname());
+		values.put("county_code", county.getCountycode());
+		values.put("city_id", county.getCityid());
+		db.insert("county", null, values);
 		}
 	}
 	
-	//读取所有country信息
-	public List<Country> loadcountries(int cityId){
-		List<Country> list=new ArrayList<Country>();
-		Cursor cursor=db.query("Country", null, "city_id=?", new String[]{String.valueOf(cityId)}, null, null, null);
+	//读取所有county信息
+	public List<County> loadcountries(int cityId){
+		List<County> list=new ArrayList<County>();
+		Cursor cursor=db.query("County", null, "city_id=?", new String[]{String.valueOf(cityId)}, null, null, null);
 		if(cursor.moveToFirst()){
 			do{
-				Country country=new Country();
-				country.setId(cursor.getInt(cursor.getColumnIndex("id")));
-				country.setCountryname(cursor.getString(cursor.getColumnIndex("country_name")));
-				country.setCountrycode(cursor.getString(cursor.getColumnIndex("country_code")));
-				country.setCityid(cityId);
-				list.add(country);
+				County county=new County();
+				county.setId(cursor.getInt(cursor.getColumnIndex("id")));
+				county.setCountyname(cursor.getString(cursor.getColumnIndex("county_name")));
+				county.setCountycode(cursor.getString(cursor.getColumnIndex("county_code")));
+				county.setCityid(cityId);
+				list.add(county);
 			}while(cursor.moveToNext());
 		}
 		return list;

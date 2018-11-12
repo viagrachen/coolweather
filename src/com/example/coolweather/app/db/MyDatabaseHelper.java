@@ -8,7 +8,7 @@ import android.widget.Toast;
 
 public class MyDatabaseHelper extends SQLiteOpenHelper{//抽象类
 
-	public static final String CREATE_PROVICE="create table provice(" +
+	public static final String CREATE_PROVINCE="create table province(" +
 			"id integer primary key autoincrement," +
 			"province_name text," +
 			"province_code text)";
@@ -19,10 +19,10 @@ public class MyDatabaseHelper extends SQLiteOpenHelper{//抽象类
 			"city_code text," +
 			"province_id integer)";
 	
-	public static final String CREATE_COUNTRY="create table country(" +
-			"id integet primary key autoincrement," +
-			"country_name text," +
-			"counrty_code text," +
+	public static final String CREATE_COUNTY="create table county(" +
+			"id integer primary key autoincrement," +
+			"county_name text," +
+			"county_code text," +
 			"city_id integer)";
 	
 	private Context mContext;
@@ -34,9 +34,9 @@ public class MyDatabaseHelper extends SQLiteOpenHelper{//抽象类
 			}
 	
 	public void onCreate(SQLiteDatabase db) {//重写，创建
-		db.execSQL(CREATE_PROVICE);
+		db.execSQL(CREATE_PROVINCE);
 		db.execSQL(CREATE_CITY);
-		db.execSQL(CREATE_COUNTRY);
+		db.execSQL(CREATE_COUNTY);
 	Toast.makeText(mContext, "Create succeeded", Toast.LENGTH_SHORT).show();
 	}
 	
